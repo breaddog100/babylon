@@ -18,7 +18,7 @@ function install_node() {
     sudo rm -rf /usr/local/go
     sudo tar -C /usr/local -xzf "go$ver.linux-amd64.tar.gz"
     echo "export PATH=\$PATH:/usr/local/go/bin:\$HOME/go/bin" >> "$HOME/.bash_profile"
-    source "$HOME/.bash_profile"
+    source $HOME/.bash_profile
 
     echo "正在更新镜像..."
     cd "$HOME"
@@ -95,7 +95,7 @@ function add_validator() {
   "min-self-delegation": "1"
 }
 EOF
-    /root/go/bin/babylond tx checkpointing create-validator ~/validator.json \
+    babylond tx checkpointing create-validator ~/validator.json \
     --chain-id=bbn-test-3 \
     --gas="auto" \
     --gas-adjustment="1.5" \
@@ -127,28 +127,32 @@ function view_logs() {
 
 # 主菜单
 function main_menu() {
-    clear
-    echo "1. 安装节点"
-    echo "2. 创建钱包"
-    echo "3. 导入钱包"
-    echo "4. 创建验证者"
-    echo "5. 查看钱包地址余额"
-    echo "6. 查看节点同步状态"
-    echo "7. 查看当前服务状态"
-    echo "8. 运行日志查询"
-    read -r -p "请输入选项（1-10）: " OPTION
-
-    case $OPTION in
-    1) install_node ;;
-    2) add_wallet ;;
-    3) import_wallet ;;
-    4) add_validator ;;
-    5) check_balances ;;
-    6) check_sync_status ;;
-    7) check_service_status ;;
-    8) view_logs ;;
-    *) echo "无效选项。" ;;
-    esac
+    while true; do
+        clear
+        echo "1. 安装节点"
+        echo "2. 创建钱包"
+        echo "3. 导入钱包"
+        echo "4. 创建验证者"
+        echo "5. 查看钱包地址余额"
+        echo "6. 查看节点同步状态"
+        echo "7. 查看当前服务状态"
+        echo "8. 运行日志查询"
+        echo "0. 退出脚本"
+        read -r -p "请输入选项（0-9）: " OPTION
+    
+        case $OPTION in
+        1) install_node ;;
+        2) add_wallet ;;
+        3) import_wallet ;;
+        4) add_validator ;;
+        5) check_balances ;;
+        6) check_sync_status ;;
+        7) check_service_status ;;
+        8) view_logs ;;
+        0) echo "退出脚本。"; exit 0 ;;
+        *) echo "无效选项，请重新输入。"; sleep 5 ;;
+        esac
+    done
 }
 
 # 显示主菜单
