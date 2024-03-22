@@ -127,32 +127,30 @@ function view_logs() {
 
 # 主菜单
 function main_menu() {
-    while true; do
-        clear
-        echo "1. 安装节点"
-        echo "2. 创建钱包"
-        echo "3. 导入钱包"
-        echo "4. 创建验证者"
-        echo "5. 查看钱包地址余额"
-        echo "6. 查看节点同步状态"
-        echo "7. 查看当前服务状态"
-        echo "8. 运行日志查询"
-        echo "0. 退出脚本"
-        read -r -p "请输入选项（0-9）: " OPTION
-    
-        case $OPTION in
-        1) install_node ;;
-        2) add_wallet ;;
-        3) import_wallet ;;
-        4) add_validator ;;
-        5) check_balances ;;
-        6) check_sync_status ;;
-        7) check_service_status ;;
-        8) view_logs ;;
-        0) echo "退出脚本。"; exit 0 ;;
-        *) echo "无效选项，请重新输入。"; sleep 5 ;;
-        esac
-    done
+    clear
+    echo "1. 安装节点"
+    echo "2. 创建钱包"
+    echo "3. 导入钱包"
+    echo "4. 创建验证者"
+    echo "5. 查看钱包地址余额"
+    echo "6. 查看节点同步状态"
+    echo "7. 查看当前服务状态"
+    echo "8. 运行日志查询"
+    echo "0. 退出脚本"
+    read -r -p "请输入选项（0-8）: " OPTION
+
+    case $OPTION in
+    1) install_node ;;
+    2) add_wallet ;;
+    3) import_wallet ;;
+    4) add_validator ;;
+    5) check_balances ;;
+    6) check_sync_status ;;
+    7) check_service_status ;;
+    8) view_logs ;;
+    0) echo "退出脚本。"; exit 0 ;;
+    *) echo "无效选项，请重新输入。"; sleep 3 ;;
+    esac
 }
 
 # 显示主菜单
