@@ -25,7 +25,7 @@ function install_node() {
     rm -rf babylon
     git clone https://github.com/babylonchain/babylon
     cd babylon
-    git checkout v0.8.5
+    git checkout v0.8.3
     make install
 
     echo "开始创建节点"
