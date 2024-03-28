@@ -83,6 +83,10 @@ function add_wallet() {
 function add_validator() {
     echo "钱包余额需大于20000ubbn，否则创建失败..."
     read -r -p "请输入你的验证者名称: " validator_name
+    read -r -p "请输入你的钱包名称: " wallet_name
+    babylond create-bls-key $(babylond keys show $wallet_name -a)
+    sudo systemctl restart babylond
+    echo "正在重启服务，请稍等..."
     sudo tee ~/validator.json > /dev/null <<EOF
 {
   "pubkey": $(babylond tendermint show-validator),
@@ -100,7 +104,7 @@ EOF
     --gas="auto" \
     --gas-adjustment="1.5" \
     --gas-prices="0.025ubbn" \
-    --from=wallet
+    --from=$wallet_name
 }
 
 function import_wallet() {
@@ -125,18 +129,29 @@ function view_logs() {
     sudo journalctl -f -u babylond.service
 }
 
+function del_node() {
+    sudo systemctl stop babylond 
+    sudo systemctl disable babylond 
+    sudo rm /etc/systemd/system/babylond.service
+    sudo systemctl daemon-reload
+    rm -rf $HOME/.babylond
+    rm -rf babylon
+    sudo rm -rf $(which babylond)
+}
+
 # 主菜单
 function main_menu() {
     clear
-    echo "1. 安装节点"
-    echo "2. 创建钱包"
-    echo "3. 导入钱包"
-    echo "4. 创建验证者"
-    echo "5. 查看钱包地址余额"
-    echo "6. 查看节点同步状态"
-    echo "7. 查看当前服务状态"
-    echo "8. 运行日志查询"
-    echo "0. 退出脚本"
+    echo "1. 安装节点install node"
+    echo "2. 创建钱包add wallet"
+    echo "3. 导入钱包import wallet"
+    echo "4. 创建验证者add validator"
+    echo "5. 查看钱包地址余额check balances"
+    echo "6. 查看节点同步状态check sync status"
+    echo "7. 查看当前服务状态check service status"
+    echo "8. 运行日志查询view logs"
+    echo "9. 删除节点del node"
+    echo "0. 退出脚本exit"
     read -r -p "请输入选项（0-8）: " OPTION
 
     case $OPTION in
@@ -148,6 +163,7 @@ function main_menu() {
     6) check_sync_status ;;
     7) check_service_status ;;
     8) view_logs ;;
+    9) del_node ;;
     0) echo "退出脚本。"; exit 0 ;;
     *) echo "无效选项，请重新输入。"; sleep 3 ;;
     esac
