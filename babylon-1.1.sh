@@ -142,7 +142,8 @@ function del_node() {
 # 主菜单
 function main_menu() {
     clear
-    echo "BreadGog出品，电报：https://t.me/breaddog"
+    echo "===============Babylon一键部署脚本==============="
+    echo "BreadDog出品，电报：https://t.me/breaddog"
     echo "推荐配置：12C64G1T"
     echo "1. 安装节点install node"
     echo "2. 创建钱包add wallet"
