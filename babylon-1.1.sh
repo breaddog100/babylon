@@ -135,41 +135,45 @@ function del_node() {
     sudo rm /etc/systemd/system/babylond.service
     sudo systemctl daemon-reload
     rm -rf $HOME/.babylond
-    rm -rf babylon
+    rm -rf $HOME/babylon
     sudo rm -rf $(which babylond)
 }
 
 # 主菜单
 function main_menu() {
-    clear
-    echo "===============Babylon一键部署脚本==============="
-    echo "BreadDog出品，电报：https://t.me/breaddog"
-    echo "推荐配置：12C64G1T"
-    echo "1. 安装节点install node"
-    echo "2. 创建钱包add wallet"
-    echo "3. 导入钱包import wallet"
-    echo "4. 创建验证者add validator"
-    echo "5. 查看钱包地址余额check balances"
-    echo "6. 查看节点同步状态check sync status"
-    echo "7. 查看当前服务状态check service status"
-    echo "8. 运行日志查询view logs"
-    echo "9. 删除节点del node"
-    echo "0. 退出脚本exit"
-    read -r -p "请输入选项（0-8）: " OPTION
-
-    case $OPTION in
-    1) install_node ;;
-    2) add_wallet ;;
-    3) import_wallet ;;
-    4) add_validator ;;
-    5) check_balances ;;
-    6) check_sync_status ;;
-    7) check_service_status ;;
-    8) view_logs ;;
-    9) del_node ;;
-    0) echo "退出脚本。"; exit 0 ;;
-    *) echo "无效选项，请重新输入。"; sleep 3 ;;
-    esac
+    while true; do
+        clear
+        echo "===============Babylon一键部署脚本==============="
+        echo "BreadDog出品，电报：https://t.me/breaddog"
+        echo "推荐配置：12C64G1T"
+        echo "1. 安装节点install node"
+        echo "2. 创建钱包add wallet"
+        echo "3. 导入钱包import wallet"
+        echo "4. 创建验证者add validator"
+        echo "5. 查看钱包地址余额check balances"
+        echo "6. 查看节点同步状态check sync status"
+        echo "7. 查看当前服务状态check service status"
+        echo "8. 运行日志查询view logs"
+        echo "9. 删除节点del node"
+        echo "0. 退出脚本exit"
+        read -r -p "请输入选项（0-8）: " OPTION
+    
+        case $OPTION in
+        1) install_node ;;
+        2) add_wallet ;;
+        3) import_wallet ;;
+        4) add_validator ;;
+        5) check_balances ;;
+        6) check_sync_status ;;
+        7) check_service_status ;;
+        8) view_logs ;;
+        9) del_node ;;
+        0) echo "退出脚本。"; exit 0 ;;
+        *) echo "无效选项，请重新输入。"; sleep 3 ;;
+        esac
+        echo "按任意键返回主菜单..."
+        read -n 1
+    done
 }
 
 # 显示主菜单
