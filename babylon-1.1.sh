@@ -144,7 +144,7 @@ function main_menu() {
     while true; do
         clear
         echo "===============Babylon一键部署脚本==============="
-        echo "BreadDog出品，电报：https://t.me/breaddog"
+        echo "沟通电报群：https://t.me/lumaogogogo"
         echo "推荐配置：12C64G1T"
         echo "1. 安装节点install node"
         echo "2. 创建钱包add wallet"
