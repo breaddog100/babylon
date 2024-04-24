@@ -156,7 +156,7 @@ function main_menu() {
         echo "8. 运行日志查询view logs"
         echo "9. 删除节点del node"
         echo "0. 退出脚本exit"
-        read -r -p "请输入选项（0-8）: " OPTION
+        read -r -p "请输入选项: " OPTION
     
         case $OPTION in
         1) install_node ;;
