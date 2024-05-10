@@ -50,7 +50,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=\$(which babylond) start
+ExecStart=$(which babylond) start
 Restart=always
 RestartSec=3
 LimitNOFILE=infinity
