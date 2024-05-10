@@ -2,9 +2,6 @@
 
 set -e
 
-# 脚本保存路径
-SCRIPT_PATH="$HOME/Babylon.sh"
-
 # 节点安装功能
 function install_node() {
     echo "正在更新系统..."
@@ -52,14 +49,14 @@ Description=Babylon daemon
 After=network-online.target
 
 [Service]
-User=\$USER
+User=$USER
 ExecStart=\$(which babylond) start
 Restart=always
 RestartSec=3
 LimitNOFILE=infinity
 
 Environment="DAEMON_NAME=babylond"
-Environment="DAEMON_HOME=\${HOME}/.babylond"
+Environment="DAEMON_HOME=${HOME}/.babylond"
 Environment="DAEMON_RESTART_AFTER_UPGRADE=true"
 Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=false"
 
